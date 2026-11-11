@@ -1,6 +1,17 @@
-# Sanoid for Unraid
-<p align="center"><img src="http://www.openoid.net/wp-content/themes/openoid/images/sanoid_logo.png" alt="sanoid logo" title="sanoid logo"></p>
-Sanoid for unRAID 
+<div align="center">
+
+<img src="images/sanoid.png" alt="Sanoid logo" width="96">
+
+<h1>Sanoid</h1>
+
+<p><strong>Policy-driven ZFS snapshot management with Sanoid on <a href="https://unraid.net/">Unraid</a>.</strong></p>
+
+<p>
+  <img src="https://img.shields.io/badge/Unraid-7.0%2B-e8543f" alt="Supported Unraid versions">
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/andrebrait/unraid-sanoid?color=green" alt="License: GPL-3.0"></a>
+</p>
+
+</div>
 
 ## Fork notice
 
