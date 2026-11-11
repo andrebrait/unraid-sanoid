@@ -4,7 +4,7 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name "sanoid">
 <!ENTITY author "Steini1984">
-<!ENTITY version "2.3.0.5">
+<!ENTITY version "2026.11.11">
 <!ENTITY repo "https://raw.githubusercontent.com/andrebrait/unraid-sanoid/master">
   <!ENTITY pluginURL "&repo;/&name;.plg">
   <!ENTITY plugin    "/boot/config/plugins/&name;">
@@ -20,22 +20,17 @@
 
 <CHANGES>
 
-###2026.11.15
-Fix: sanoid no longer loses snapshot cache entries after a zfs-recursive snapshot (recursive = zfs), which made it take extra snapshots (upstream sanoid pull request 1023), and no longer prints cache updates to the console, which made cron send mail (upstream pull request 1071).
-
-###2026.11.14
-The plugin is renamed from unRAID6-Sanoid to Sanoid and now lives at https://github.com/andrebrait/unraid-sanoid. Installing it removes the unRAID6-Sanoid plugin; nothing else changes.
-
-###2026.11.13
-The plugin now requires Unraid 7.0 or newer. Support for Unraid 6 and its extra mbuffer and perl packages was removed.
-
-###2026.11.12
-Security: syncoid now escapes ZFS resume tokens (upstream sanoid pull request 1114, fixing issue 1118), so a malicious remote receiver can no longer inject commands on the sender.
-The Sanoid package is now built from the upstream v2.3.0 release (SHA256-verified) with that patch applied by a GitHub Actions workflow in this repository, instead of a prebuilt binary of unknown origin.
-Fixed the post-install message: Sanoid is installed at /usr/local/sbin/sanoid, not /usr/local/bin/sanoid.
-
 ###2026.11.11
-Fork: plugin, packages and updates now come from https://github.com/andrebrait/unRAID6-Sainoid
+Installs Sanoid 2.3.0 (https://github.com/jimsalterjrs/sanoid/releases/tag/v2.3.0) with these upstream fixes that are not in a release yet:
+- syncoid escapes ZFS resume tokens, so a malicious remote receiver can no longer inject commands on the sender (pull request 1114, fixing issue 1118)
+- sanoid no longer loses snapshot cache entries after a zfs-recursive snapshot (recursive = zfs), which made it take extra snapshots (pull request 1023)
+- sanoid no longer prints cache updates to the console, which made cron send mail (pull request 1071)
+
+The plugin is now a maintained fork named Sanoid, at https://github.com/andrebrait/unraid-sanoid. Installing it removes the unRAID6-Sanoid plugin.
+The Sanoid package is built from the SHA256-verified upstream release by a GitHub Actions workflow in this repository, instead of a prebuilt binary of unknown origin.
+The plugin now requires Unraid 7.0 or newer; support for Unraid 6 and its extra mbuffer and perl packages was removed.
+The plugin is versioned by release date; each entry names the Sanoid version it installs.
+Fixed the post-install message: Sanoid is installed at /usr/local/sbin/sanoid, not /usr/local/bin/sanoid.
 
 ###2025.10.21
 Update to Sanoid 2.3.0
