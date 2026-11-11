@@ -4,8 +4,8 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name "unRAID6-Sanoid">
 <!ENTITY author "Steini1984">
-<!ENTITY version "2.3.0.3">
-<!ENTITY repo "https://raw.githubusercontent.com/andrebrait/unRAID6-Sainoid/master">
+<!ENTITY version "2.3.0.4">
+<!ENTITY repo "https://raw.githubusercontent.com/andrebrait/unraid-sanoid/master">
   <!ENTITY pluginURL "&repo;/&name;.plg">
   <!ENTITY plugin    "/boot/config/plugins/&name;">
   <!ENTITY emhttp    "/usr/local/emhttp/plugins/&name;">
@@ -19,6 +19,9 @@
 >
 
 <CHANGES>
+
+###2026.11.14
+This plugin is now called Sanoid. Install https://raw.githubusercontent.com/andrebrait/unraid-sanoid/master/sanoid.plg from Plugins, Install Plugin; it replaces this plugin and keeps working the same way. This plugin will not receive further updates.
 
 ###2026.11.13
 The plugin now requires Unraid 7.0 or newer. Support for Unraid 6 and its extra mbuffer and perl packages was removed.

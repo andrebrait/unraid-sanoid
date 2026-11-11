@@ -1,4 +1,4 @@
-# unRAID6-Sainoid
+# Sanoid for Unraid
 <p align="center"><img src="http://www.openoid.net/wp-content/themes/openoid/images/sanoid_logo.png" alt="sanoid logo" title="sanoid logo"></p>
 Sanoid for unRAID 
 
@@ -11,7 +11,7 @@ This is a maintained fork of [Steini1984/unRAID6-Sainoid](https://github.com/Ste
 In the Unraid web UI, go to **Plugins → Install Plugin** and enter:
 
 ```
-https://raw.githubusercontent.com/andrebrait/unRAID6-Sainoid/master/unRAID6-Sanoid.plg
+https://raw.githubusercontent.com/andrebrait/unraid-sanoid/master/sanoid.plg
 ```
 
 Installing over the original Sanoid plugin keeps your settings.
@@ -22,7 +22,7 @@ Installing over the original Sanoid plugin keeps your settings.
 
 ### Issues
 
-Report bugs and feature requests in the [issue tracker of this fork](https://github.com/andrebrait/unRAID6-Sainoid/issues).
+Report bugs and feature requests in the [issue tracker of this fork](https://github.com/andrebrait/unraid-sanoid/issues).
 
 "Sanoid is a policy-driven snapshot management tool for ZFS filesystems. When combined with the Linux KVM hypervisor, you can use it to make your systems functionally immortal."
 - https://github.com/jimsalterjrs/sanoid
