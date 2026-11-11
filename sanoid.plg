@@ -4,7 +4,7 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name "sanoid">
 <!ENTITY author "Steini1984">
-<!ENTITY version "2026.11.11">
+<!ENTITY version "2026.11.11.1">
 <!ENTITY repo "https://raw.githubusercontent.com/andrebrait/unraid-sanoid/master">
   <!ENTITY pluginURL "&repo;/&name;.plg">
   <!ENTITY plugin    "/boot/config/plugins/&name;">
@@ -15,10 +15,14 @@
      author="&author;"
      version="&version;"
      pluginURL="&pluginURL;"
+     support="https://github.com/andrebrait/unraid-sanoid/issues"
      min="7.0.0"
 >
 
 <CHANGES>
+
+###2026.11.11.1
+The Support link on the Plugins page now opens this fork's GitHub issues.
 
 ###2026.11.11
 Installs Sanoid 2.3.0 (https://github.com/jimsalterjrs/sanoid/releases/tag/v2.3.0) with these upstream fixes that are not in a release yet:
