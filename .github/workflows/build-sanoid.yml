@@ -15,7 +15,7 @@ permissions:
 env:
   SANOID_VERSION: 2.3.0
   SANOID_SHA256: 1d8735a271a34ec87ea46313a66f6f20bd38b583886924574d3c1f72ea173620
-  PKG_REVISION: 1
+  PKG_REVISION: 2
 
 jobs:
   build:
@@ -36,6 +36,10 @@ jobs:
           cd "sanoid-${SANOID_VERSION}"
           for p in ../patches/*.patch; do patch -p1 --no-backup-if-mismatch < "$p"; done
           grep -q 'escapeshellparam($receivetoken)' syncoid
+          # shellcheck disable=SC2016 # literal Perl source
+          grep -qF 'open my $fh, ">> $cache.tmp"' sanoid
+          # shellcheck disable=SC2016 # literal Perl source
+          if grep -qF 'print "${dataset}\@${suffix}\n";' sanoid; then echo "cache updates still printed to stdout"; exit 1; fi
           for s in sanoid syncoid findoid; do perl -c "$s"; done
 
       - name: Package

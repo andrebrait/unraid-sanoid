@@ -1,0 +1,24 @@
+# Source: https://github.com/jimsalterjrs/sanoid/pull/1071 (merged upstream after v2.3.0, unreleased). Original commit(s) vendored unmodified (git format-patch). Apply with: patch -p1
+
+From 2343089a0809740d0dad27c74e54f43153e558fd Mon Sep 17 00:00:00 2001
+From: Roberto Ricci <io@r-ricci.it>
+Date: Sat, 31 Jan 2026 19:11:39 +0100
+Subject: [PATCH] don't print cache updates on stdout
+
+Fixes 393a4672e5695af5a5a8c82faed455e5689e0c69
+---
+ sanoid | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/sanoid b/sanoid
+index 8e0d1861..ce31f18a 100755
+--- a/sanoid
++++ b/sanoid
+@@ -1792,7 +1792,6 @@ sub addcachedsnapshots {
+ 			my @datasets = getchilddatasets($dataset);
+ 
+ 			foreach my $dataset(@datasets) {
+-				print "${dataset}\@${suffix}\n";
+ 				print $fh "${dataset}\@${suffix}\n";
+ 			}
+ 		}
