@@ -1,5 +1,14 @@
 # Source: https://github.com/jimsalterjrs/sanoid/pull/1114 (open, unreleased at time of vendoring; fixes #1118)
-# Escape receive resume tokens in zfs send commands. Applies to sanoid v2.3.0 syncoid with: patch -p1
+# Original commit 5dfb3f20e9b268997351bbe6694fe077db01e037 by Bas Nijholt, vendored unmodified (git format-patch). Apply with: patch -p1
+
+From 5dfb3f20e9b268997351bbe6694fe077db01e037 Mon Sep 17 00:00:00 2001
+From: Bas Nijholt <bas@nijho.lt>
+Date: Sat, 26 Sep 2026 14:41:20 -0700
+Subject: [PATCH] Escape receive resume tokens in send commands
+
+---
+ syncoid | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
 diff --git a/syncoid b/syncoid
 index 34e5a120..5ccf2b7f 100755
