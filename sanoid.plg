@@ -3,8 +3,8 @@
 <!-- PLUGIN DEFINITIONS -->
 <!DOCTYPE PLUGIN [
 <!ENTITY name "sanoid">
-<!ENTITY author "Steini1984">
-<!ENTITY version "2026.11.11.2">
+<!ENTITY author "andrebrait">
+<!ENTITY version "2026.11.11.3">
 <!ENTITY repo "https://raw.githubusercontent.com/andrebrait/unraid-sanoid/master">
   <!ENTITY pluginURL "&repo;/&name;.plg">
   <!ENTITY plugin    "/boot/config/plugins/&name;">
@@ -20,6 +20,9 @@
 >
 
 <CHANGES>
+
+###2026.11.11.3
+The Plugins page shows the plugin name in bold like other plugins and lists andrebrait as the author; the plugin is based on steini84's original.
 
 ###2026.11.11.1
 The Support link on the Plugins page now opens this fork's GitHub issues.
@@ -66,11 +69,18 @@ Initial release Sanoid 2.0.3
 
 </CHANGES>
 
+<!-- The plugin manager does not overwrite existing files, so remove the description before writing the current one. -->
+<FILE Run="/bin/bash">
+<INLINE>
+rm -f &emhttp;/README.md
+</INLINE>
+</FILE>
+
 <FILE Name="&emhttp;/README.md">
 <INLINE>
-Sanoid
+**Sanoid**
 
-Sanoid is a policy-driven snapshot management tool for ZFS filesystems.
+Sanoid is a policy-driven snapshot management tool for ZFS filesystems. Based on steini84's Sanoid plugin.
 
 </INLINE>
 </FILE>
