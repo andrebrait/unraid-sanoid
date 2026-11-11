@@ -26,3 +26,7 @@ Report bugs and feature requests in the [issue tracker of this fork](https://git
 
 "Sanoid is a policy-driven snapshot management tool for ZFS filesystems. When combined with the Linux KVM hypervisor, you can use it to make your systems functionally immortal."
 - https://github.com/jimsalterjrs/sanoid
+
+## License
+
+This plugin is licensed under the [GNU General Public License v3.0](LICENSE), the same license as [Sanoid](https://github.com/jimsalterjrs/sanoid) itself.
