@@ -4,8 +4,8 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name "unRAID6-Sanoid">
 <!ENTITY author "Steini1984">
-<!ENTITY version "2.3.0">
-<!ENTITY repo "https://raw.githubusercontent.com/&author;/unRAID6-Sainoid/master">
+<!ENTITY version "2.3.0.1">
+<!ENTITY repo "https://raw.githubusercontent.com/andrebrait/unRAID6-Sainoid/master">
   <!ENTITY pluginURL "&repo;/&name;.plg">
   <!ENTITY plugin    "/boot/config/plugins/&name;">
   <!ENTITY emhttp    "/usr/local/emhttp/plugins/&name;">
@@ -18,6 +18,9 @@
 >
 
 <CHANGES>
+
+###2026.11.11
+Fork: plugin, packages and updates now come from https://github.com/andrebrait/unRAID6-Sainoid
 
 ###2025.10.21
 Update to Sanoid 2.3.0
