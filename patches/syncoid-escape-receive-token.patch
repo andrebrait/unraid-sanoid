@@ -1,0 +1,30 @@
+# Source: https://github.com/jimsalterjrs/sanoid/pull/1114 (open, unreleased at time of vendoring; fixes #1118)
+# Escape receive resume tokens in zfs send commands. Applies to sanoid v2.3.0 syncoid with: patch -p1
+
+diff --git a/syncoid b/syncoid
+index 34e5a120..5ccf2b7f 100755
+--- a/syncoid
++++ b/syncoid
+@@ -1106,7 +1106,8 @@ sub syncclone {
+ sub syncresume {
+ 	my ($sourcehost, $sourcefs, $targethost, $targetfs, $receivetoken) = @_;
+ 
+-	my $sendsource = "-t $receivetoken";
++	my $receivetokenescaped = escapeshellparam($receivetoken);
++	my $sendsource = "-t $receivetokenescaped";
+ 	my $pvsize = getsendsize($sourcehost,"","",$sourceisroot,$receivetoken);
+ 
+ 	my $srcname = buildnicename($sourcehost, $sourcefs);
+@@ -2137,7 +2138,11 @@ sub getsendsize {
+ 	# in case of a resumed receive, get the remaining
+ 	# size based on the resume token
+ 	if (defined($receivetoken)) {
+-		$snaps = "-t $receivetoken";
++		my $receivetokenescaped = escapeshellparam($receivetoken);
++		if ($sourcehost ne '') {
++			$receivetokenescaped = escapeshellparam($receivetokenescaped);
++		}
++		$snaps = "-t $receivetokenescaped";
+ 	}
+ 
+ 	my $sendoptions;

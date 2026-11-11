@@ -1,0 +1,65 @@
+name: Build sanoid package
+
+# Commits the package to the branch it runs on; never run on master (the .plg is served live from it).
+on:
+  workflow_dispatch:
+  push:
+    branches-ignore: [master]
+    paths:
+      - .github/workflows/build-sanoid.yml
+      - patches/**
+
+permissions:
+  contents: write
+
+env:
+  SANOID_VERSION: 2.3.0
+  SANOID_SHA256: 1d8735a271a34ec87ea46313a66f6f20bd38b583886924574d3c1f72ea173620
+  PKG_REVISION: 1
+
+jobs:
+  build:
+    if: github.ref != 'refs/heads/master'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install perl modules for syntax checks
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libconfig-inifiles-perl libcapture-tiny-perl
+
+      - name: Fetch, verify and patch upstream sanoid
+        run: |
+          set -euo pipefail
+          curl -fsSL "https://github.com/jimsalterjrs/sanoid/archive/refs/tags/v${SANOID_VERSION}.tar.gz" -o sanoid.tar.gz
+          echo "${SANOID_SHA256}  sanoid.tar.gz" | sha256sum -c -
+          tar -xzf sanoid.tar.gz
+          cd "sanoid-${SANOID_VERSION}"
+          for p in ../patches/*.patch; do patch -p1 --no-backup-if-mismatch < "$p"; done
+          grep -q 'escapeshellparam($receivetoken)' syncoid
+          for s in sanoid syncoid findoid; do perl -c "$s"; done
+
+      - name: Package
+        run: |
+          set -euo pipefail
+          pkg="sanoid.${SANOID_VERSION}-${PKG_REVISION}.x86_64.tgz"
+          src="sanoid-${SANOID_VERSION}"
+          root="$PWD/pkgroot"
+          install -d "$root/etc/sanoid" "$root/usr/local/sbin"
+          install -m 644 "$src/sanoid.conf" "$src/sanoid.defaults.conf" "$root/etc/sanoid/"
+          install -m 755 "$src/sanoid" "$src/syncoid" "$src/findoid" "$src/sleepymutex" "$root/usr/local/sbin/"
+          # Deterministic output so re-runs do not create spurious commits.
+          tar -C "$root" --sort=name --owner=0 --group=0 --numeric-owner --mtime='2025-10-21 00:00:00 UTC' -cf - ./ etc usr | gzip -9n > "packages/$pkg"
+          (cd packages && md5sum "$pkg" > "$pkg.md5")
+          tar -tzvf "packages/$pkg"
+          cat "packages/$pkg.md5"
+          echo "PKG=$pkg" >> "$GITHUB_ENV"
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: sanoid-package
+          path: packages/sanoid.*-*.x86_64.tgz*
+
+      - uses: stefanzweifel/git-auto-commit-action@d0b01107b5db882071f96de5dd4b54961ea93f4c # v7.2.1
+        with:
+          commit_message: "build: package ${{ env.PKG }}"
+          file_pattern: packages/sanoid.*-*.x86_64.tgz packages/sanoid.*-*.x86_64.tgz.md5

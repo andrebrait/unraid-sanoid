@@ -4,7 +4,7 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name "unRAID6-Sanoid">
 <!ENTITY author "Steini1984">
-<!ENTITY version "2.3.0.1">
+<!ENTITY version "2.3.0.2">
 <!ENTITY repo "https://raw.githubusercontent.com/andrebrait/unRAID6-Sainoid/master">
   <!ENTITY pluginURL "&repo;/&name;.plg">
   <!ENTITY plugin    "/boot/config/plugins/&name;">
@@ -18,6 +18,11 @@
 >
 
 <CHANGES>
+
+###2026.11.12
+Security: syncoid now escapes ZFS resume tokens (upstream sanoid pull request 1114, fixing issue 1118), so a malicious remote receiver can no longer inject commands on the sender.
+The Sanoid package is now built from the upstream v2.3.0 release (SHA256-verified) with that patch applied by a GitHub Actions workflow in this repository, instead of a prebuilt binary of unknown origin.
+Fixed the post-install message: Sanoid is installed at /usr/local/sbin/sanoid, not /usr/local/bin/sanoid.
 
 ###2026.11.11
 Fork: plugin, packages and updates now come from https://github.com/andrebrait/unRAID6-Sainoid
@@ -77,7 +82,7 @@ perl-Capture-Tiny-0.48-x86_64-1ponce.txz
 perl-Config-IniFiles-2.82-x86_64-3_slonly.txz
 perl-Exporter-Tiny-1.000000-x86_64-1ponce.txz
 perl-List-MoreUtils-0.425-x86_64-2_slonly.txz
-sanoid.2.3.0.x86_64.tgz
+sanoid.2.3.0-1.x86_64.tgz
 "
 
 # Append packages required for unraid 6
@@ -144,7 +149,7 @@ done
 echo ""
 echo "********************************************************************************"
 echo "Sanoid installed - you need to manually schedule Sanoid - for example with Cron"
-echo "* * * * * TZ=UTC /usr/local/bin/sanoid --cron"
+echo "* * * * * TZ=UTC /usr/local/sbin/sanoid --cron"
 echo ""
 echo "please read the guide @ https://github.com/jimsalterjrs/sanoid"
 echo "********************************************************************************"
