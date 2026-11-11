@@ -4,7 +4,7 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name "unRAID6-Sanoid">
 <!ENTITY author "Steini1984">
-<!ENTITY version "2.3.0.2">
+<!ENTITY version "2.3.0.3">
 <!ENTITY repo "https://raw.githubusercontent.com/andrebrait/unRAID6-Sainoid/master">
   <!ENTITY pluginURL "&repo;/&name;.plg">
   <!ENTITY plugin    "/boot/config/plugins/&name;">
@@ -15,9 +15,13 @@
      author="&author;"
      version="&version;"
      pluginURL="&pluginURL;"
+     min="7.0.0"
 >
 
 <CHANGES>
+
+###2026.11.13
+The plugin now requires Unraid 7.0 or newer. Support for Unraid 6 and its extra mbuffer and perl packages was removed.
 
 ###2026.11.12
 Security: syncoid now escapes ZFS resume tokens (upstream sanoid pull request 1114, fixing issue 1118), so a malicious remote receiver can no longer inject commands on the sender.
@@ -59,7 +63,7 @@ Initial release Sanoid 2.0.3
 
 <FILE Name="&emhttp;/README.md">
 <INLINE>
-Sanoid for unRAID 6/7
+Sanoid for unRAID 7
 
 Sanoid is a policy-driven snapshot management tool for ZFS filesystems.
 
@@ -85,22 +89,6 @@ perl-List-MoreUtils-0.425-x86_64-2_slonly.txz
 sanoid.2.3.0-1.x86_64.tgz
 "
 
-# Append packages required for unraid 6
-source /etc/unraid-version
-major=${version:0:2}
-minor=${version:2:2}
-if [[ $((${major/./}*1)) -lt 7 ]]; then
-  PACKAGES="
-mbuffer-20240107-x86_64-1_SBo.tgz
-${PACKAGES}
-"
-  if [[ $((${minor/./}*1)) -lt 11 ]]; then
-    PACKAGES="
-perl-5.34.0-x86_64-2_slack15.0.txz
-${PACKAGES}
-"
-  fi
-fi
 
 #Download and install a package
 download_install() {
