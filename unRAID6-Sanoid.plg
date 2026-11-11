@@ -4,7 +4,7 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name "unRAID6-Sanoid">
 <!ENTITY author "Steini1984">
-<!ENTITY version "2.3.0.4">
+<!ENTITY version "2.3.0.5">
 <!ENTITY repo "https://raw.githubusercontent.com/andrebrait/unraid-sanoid/master">
   <!ENTITY pluginURL "&repo;/&name;.plg">
   <!ENTITY plugin    "/boot/config/plugins/&name;">
@@ -20,8 +20,11 @@
 
 <CHANGES>
 
+###2026.11.15
+Fix: sanoid no longer loses snapshot cache entries after a zfs-recursive snapshot (recursive = zfs), which made it take extra snapshots, and no longer prints cache updates to the console. This plugin is now called Sanoid; install https://raw.githubusercontent.com/andrebrait/unraid-sanoid/master/sanoid.plg to keep getting updates.
+
 ###2026.11.14
-This plugin is now called Sanoid. Install https://raw.githubusercontent.com/andrebrait/unraid-sanoid/master/sanoid.plg from Plugins, Install Plugin; it replaces this plugin and keeps working the same way. This plugin will not receive further updates.
+This plugin is now called Sanoid. Install https://raw.githubusercontent.com/andrebrait/unraid-sanoid/master/sanoid.plg from Plugins, Install Plugin; it replaces this plugin and keeps working the same way.
 
 ###2026.11.13
 The plugin now requires Unraid 7.0 or newer. Support for Unraid 6 and its extra mbuffer and perl packages was removed.
@@ -89,7 +92,7 @@ perl-Capture-Tiny-0.48-x86_64-1ponce.txz
 perl-Config-IniFiles-2.82-x86_64-3_slonly.txz
 perl-Exporter-Tiny-1.000000-x86_64-1ponce.txz
 perl-List-MoreUtils-0.425-x86_64-2_slonly.txz
-sanoid.2.3.0-1.x86_64.tgz
+sanoid.2.3.0-2.x86_64.tgz
 "
 
 
