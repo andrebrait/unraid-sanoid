@@ -4,7 +4,7 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name "sanoid">
 <!ENTITY author "andrebrait">
-<!ENTITY version "2026.11.11.3">
+<!ENTITY version "2026.11.11">
 <!ENTITY repo "https://raw.githubusercontent.com/andrebrait/unraid-sanoid/master">
   <!ENTITY pluginURL "&repo;/&name;.plg">
   <!ENTITY plugin    "/boot/config/plugins/&name;">
@@ -21,21 +21,16 @@
 
 <CHANGES>
 
-###2026.11.11.3
-The Plugins page shows the plugin name in bold like other plugins and lists andrebrait as the author; the plugin is based on steini84's original.
-
-###2026.11.11.1
-The Support link on the Plugins page now opens this fork's GitHub issues.
-
 ###2026.11.11
 Installs Sanoid 2.3.0 (https://github.com/jimsalterjrs/sanoid/releases/tag/v2.3.0) with these upstream fixes that are not in a release yet:
 - syncoid escapes ZFS resume tokens, so a malicious remote receiver can no longer inject commands on the sender (pull request 1114, fixing issue 1118)
 - sanoid no longer loses snapshot cache entries after a zfs-recursive snapshot (recursive = zfs), which made it take extra snapshots (pull request 1023)
 - sanoid no longer prints cache updates to the console, which made cron send mail (pull request 1071)
 
-The plugin is now a maintained fork named Sanoid, at https://github.com/andrebrait/unraid-sanoid. Installing it removes the unRAID6-Sanoid plugin.
+The plugin is now a maintained fork named Sanoid, by andrebrait, based on steini84's unRAID6-Sanoid plugin. Installing it removes the unRAID6-Sanoid plugin.
+Support: https://github.com/andrebrait/unraid-sanoid/issues
 The Sanoid package is built from the SHA256-verified upstream release by a GitHub Actions workflow in this repository, instead of a prebuilt binary of unknown origin.
-The plugin now requires Unraid 7.0 or newer; support for Unraid 6 and its extra mbuffer and perl packages was removed.
+The plugin requires Unraid 7.0 or newer; support for Unraid 6 and its extra mbuffer and perl packages was removed.
 The plugin is versioned by release date; each entry names the Sanoid version it installs.
 Fixed the post-install message: Sanoid is installed at /usr/local/sbin/sanoid, not /usr/local/bin/sanoid.
 
