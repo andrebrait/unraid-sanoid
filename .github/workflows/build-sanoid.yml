@@ -48,7 +48,9 @@ jobs:
           install -m 644 "$src/sanoid.conf" "$src/sanoid.defaults.conf" "$root/etc/sanoid/"
           install -m 755 "$src/sanoid" "$src/syncoid" "$src/findoid" "$src/sleepymutex" "$root/usr/local/sbin/"
           # Deterministic output so re-runs do not create spurious commits.
-          tar -C "$root" --sort=name --owner=0 --group=0 --numeric-owner --mtime='2025-10-21 00:00:00 UTC' -cf - ./ etc usr | gzip -9n > "packages/$pkg"
+          # Explicit member list: "./" first, then bare paths, same as the previous package.
+          (cd "$root" && { echo ./; find etc usr | LC_ALL=C sort; }) > members.txt
+          tar -C "$root" --no-recursion -T members.txt --owner=0 --group=0 --numeric-owner --mtime='2025-10-21 00:00:00 UTC' -cf - | gzip -9n > "packages/$pkg"
           (cd packages && md5sum "$pkg" > "$pkg.md5")
           tar -tzvf "packages/$pkg"
           cat "packages/$pkg.md5"
