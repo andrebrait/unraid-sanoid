@@ -7,6 +7,7 @@
 <p><strong>Policy-driven ZFS snapshot management with Sanoid on <a href="https://unraid.net/">Unraid</a>.</strong></p>
 
 <p>
+  <a href="https://github.com/andrebrait/unraid-sanoid/releases"><img src="https://img.shields.io/github/v/release/andrebrait/unraid-sanoid?label=release&color=blue" alt="Latest release"></a>
   <img src="https://img.shields.io/badge/Unraid-7.0%2B-e8543f" alt="Supported Unraid versions">
   <a href="LICENSE"><img src="https://img.shields.io/github/license/andrebrait/unraid-sanoid?color=green" alt="License: GPL-3.0"></a>
 </p>
