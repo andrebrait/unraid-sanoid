@@ -86,6 +86,38 @@ iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABhGlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1I
 </INLINE>
 </FILE>
 
+<!-- Packages: the plugin manager downloads each one and checks its SHA256 before the install script below runs.
+     Update the SHA256 whenever a package file changes. -->
+<FILE Name="&plugin;/packages/lzop-1.04-x86_64-2_slonly.txz">
+<URL>&repo;/packages/lzop-1.04-x86_64-2_slonly.txz</URL>
+<SHA256>77a2a0dc6689f8a6f3b8824a2f310f8b5f5ae225b0778fd5b3b4a696efda302f</SHA256>
+</FILE>
+
+<FILE Name="&plugin;/packages/perl-Capture-Tiny-0.48-x86_64-1ponce.txz">
+<URL>&repo;/packages/perl-Capture-Tiny-0.48-x86_64-1ponce.txz</URL>
+<SHA256>db67291b51e5269769713f7d1a894f857c5d5ce64b7f45c550822934041ea3f7</SHA256>
+</FILE>
+
+<FILE Name="&plugin;/packages/perl-Config-IniFiles-2.82-x86_64-3_slonly.txz">
+<URL>&repo;/packages/perl-Config-IniFiles-2.82-x86_64-3_slonly.txz</URL>
+<SHA256>6a3cd75913474181431cce9669b4fd3b42036e06953b18f89e6ab90a0edd54f1</SHA256>
+</FILE>
+
+<FILE Name="&plugin;/packages/perl-Exporter-Tiny-1.000000-x86_64-1ponce.txz">
+<URL>&repo;/packages/perl-Exporter-Tiny-1.000000-x86_64-1ponce.txz</URL>
+<SHA256>c2ee0a72af5ae60f4754763f8bfc4cdf0d2c1615ad81c76b4006f32c741d676d</SHA256>
+</FILE>
+
+<FILE Name="&plugin;/packages/perl-List-MoreUtils-0.425-x86_64-2_slonly.txz">
+<URL>&repo;/packages/perl-List-MoreUtils-0.425-x86_64-2_slonly.txz</URL>
+<SHA256>88463d79ac1b7c4bd7a6577667100b22192defeffa3650449898ff6211ee282c</SHA256>
+</FILE>
+
+<FILE Name="&plugin;/packages/sanoid.2.3.0-2.x86_64.tgz">
+<URL>&repo;/packages/sanoid.2.3.0-2.x86_64.tgz</URL>
+<SHA256>a84d0a7164d41cff1a54a7b5926e7a5956d22140027016cd75f6d496974c9e27</SHA256>
+</FILE>
+
 <FILE Run="/bin/bash">
 <INLINE>
 
@@ -104,47 +136,29 @@ sanoid.2.3.0-2.x86_64.tgz
 "
 
 
-#Download and install a package
-download_install() {
+# Install a package that the plugin manager downloaded and verified above
+install_package() {
 
-  local dest="&plugin;/packages/${1}"
-  local src="&repo;/packages/${1}"
+  local pkg="&plugin;/packages/${1}"
 
-  mkdir -p "&plugin;/packages"
-  if [ ! -f "${dest}" ]; then
-    curl --location --silent --fail "${src}" --output "${dest}"
-    echo download
-  fi
-  if [ ! -f "${dest}.md5" ]; then
-    curl --location --silent --fail "${src}.md5" --output "${dest}.md5"
-  fi
-
-  orig_md5=$(/usr/bin/cat $dest.md5)
-  file_md5=$(/usr/bin/md5sum ${dest})
-
-  if [ "${file_md5:0:32}" != "${orig_md5:0:32}" ]; then
-    echo "Wrong '${1}' package md5 hash."
-    rm "${dest}"
+  if [ ! -f "${pkg}" ]; then
+    echo "Package '${1}' is missing from &plugin;/packages."
     exit 1
+  fi
+
+  if /sbin/installpkg "${pkg}" ; then
+    echo ""
   else
+    echo install failed
+    exit 1
+  fi
 
-    if /sbin/installpkg "$dest" ; then
-      echo ""
-    else
-        echo install failed 
-        exit 1
-    fi
-
-    #todo - delete old files
-    #echo "Deleting old files.."
-
-    #fix for the icon
-    chmod 755 &emhttp;/
-  fi 
+  #fix for the icon
+  chmod 755 &emhttp;/
 }
 
 for package in $PACKAGES; do
-  download_install $package
+  install_package $package
 done
 
 
