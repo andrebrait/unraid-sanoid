@@ -4,7 +4,7 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name "sanoid">
 <!ENTITY author "andrebrait">
-<!ENTITY version "2026.11.11">
+<!ENTITY version "2026.11.13">
 <!ENTITY repo "https://raw.githubusercontent.com/andrebrait/unraid-sanoid/master">
   <!ENTITY pluginURL "&repo;/&name;.plg">
   <!ENTITY plugin    "/boot/config/plugins/&name;">
@@ -20,6 +20,9 @@
 >
 
 <CHANGES>
+
+###2026.11.13
+Verify downloaded plugin packages using SHA256 checksums before installing them.
 
 ###2026.11.11
 Installs Sanoid 2.3.0 (https://github.com/jimsalterjrs/sanoid/releases/tag/v2.3.0) with these upstream fixes that are not in a release yet:
